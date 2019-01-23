@@ -1,0 +1,36 @@
+# QR Codes
+
+[![Build Status](https://travis-ci.org/jocic/PHP.QrCodes.svg?branch=master)](https://travis-ci.org/jocic/PHP.QrCodes) [![Coverage Status](https://coveralls.io/repos/github/jocic/PHP.QrCodes/badge.svg?branch=master)](https://coveralls.io/github/jocic/PHP.QrCodes?branch=master) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/7cfced1454964bd8a1cb0ef0134eec16)](https://www.codacy.com/app/jocic/PHP.QrCodes?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jocic/PHP.GoogleAuthenticator&amp;utm_campaign=Badge_Grade) [![Latest Stable Version](https://poser.pugx.org/jocic/qr-codes/v/stable)](https://packagist.org/packages/jocic/qr-codes) [![License](https://poser.pugx.org/jocic/qr-codes/license)](https://packagist.org/packages/jocic/qr-codes)
+
+QR Codes is a PHP library providing a simple API for generating QR codes both locally and remotely.
+
+[![Buy Me Coffee](images/buy-me-coffee.png)](https://www.paypal.me/DjordjeJocic)
+
+## Contribution
+
+Please review the following documents if you are planning to contribute to the project:
+
+*   [Contributor Covenant Code of Conduct](code-of-conduct.md)
+*   [Contribution Guidelines](contributing.md)
+*   [Pull Request Template](pull-request-template.md)
+*   [MIT License](license.md)
+
+## Integration
+
+My hourly rate is fairly reasonable so, if you need help with integrating **QR Codes** to your existing project, feel free to contact me via the email below.
+
+Integration inquiries: [office@djordjejocic.com](mailto:office@djordjejocic.com)
+
+## Support
+
+Please don't hesitate to contact me if you have any questions, ideas, or concerns.
+
+My Twitter account is: [@jocic_91](https://www.twitter.com/jocic_91)
+
+My support E-Mail address is: [support@djordjejocic.com](mailto:support@djordjejocic.com)
+
+## Copyright & License
+
+Copyright (C) 2018 Đorđe Jocić
+
+Licensed under the MIT license.

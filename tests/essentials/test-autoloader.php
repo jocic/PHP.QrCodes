@@ -81,7 +81,7 @@
             foreach ($testValues as $testValue => $testResult)
             {
                 $this->assertSame($testResult,
-                    load_google_authenticator_class($testValue), $testValue);
+                    load_qr_codes_class($testValue), $testValue);
             }
         }
         

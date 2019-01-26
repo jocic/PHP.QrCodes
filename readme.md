@@ -6,6 +6,54 @@ QR Codes is a PHP library providing a simple API for generating QR codes both lo
 
 [![Buy Me Coffee](images/buy-me-coffee.png)](https://www.paypal.me/DjordjeJocic)
 
+**Project is still under development...slow ride...take it easy...**
+
+## Versioning Scheme
+
+I use a 3-digit [Semantic Versioning](https://semver.org/spec/v2.0.0.html) identifier, for example 1.0.2. These digits have the following meaning:
+
+*   The first digit (1) specifies the MAJOR version number.
+*   The second digit (0) specifies the MINOR version number.
+*   The third digit (2) specifies the PATCH version number.
+
+Complete documentation can be found by following the link above.
+
+## Requirements
+
+You only need to have PHP >=7.0 available on your system to use **QR Codes** in your application. However, for running unit tests, you need to have the following extensions installed:
+
+*   [Multibyte String](https://secure.php.net/manual/en/book.mbstring.php)
+*   [DOM](https://secure.php.net/manual/en/dom.setup.php)
+
+## Installation
+
+There's two ways you can add **QR Codes** library to your project:
+
+*   Copying files from the "source" directory to your project and requiring the "Autoload.php" script
+*   Via Composer, by executing the command below
+
+```bash
+composer require jocic/qr-codes dev-master
+```
+
+## Tests
+
+Following unit tests are available:
+
+*   **Essentials** - Tests for library's essential elements.
+
+You can execute them easily from the terminal like in the example below.
+
+```bash
+bash ./scripts/phpunit.sh --testsuite essentials
+```
+
+Please don’t forget to install necessary dependencies before attempting to do the God's work above. They may be important.
+
+```bash
+bash ./scripts/composer.sh install
+```
+
 ## Contribution
 
 Please review the following documents if you are planning to contribute to the project:

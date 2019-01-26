@@ -29,7 +29,7 @@
     |* OTHER DEALINGS IN THE SOFTWARE.                                 *|
     \*******************************************************************/
     
-    namespace Jocic\GoogleAuthenticator\Qr\Remote;
+    namespace Jocic\QrCodes\Remote;
     
     /**
      * <i>RemoteQrInterface</i> is an interface used to enforce implementation of

@@ -29,15 +29,13 @@
     |* OTHER DEALINGS IN THE SOFTWARE.                                 *|
     \*******************************************************************/
     
-    namespace Jocic\GoogleAuthenticator\Qr;
-    
-    use Jocic\GoogleAuthenticator\FileSystem;
+    namespace Jocic\QrCodes;
     
     /**
      * <i>QrCore</i> class contains generic methods used for QR code creation.
      * 
      * @author    Djordje Jocic <office@djordjejocic.com>
-     * @copyright 2018 All Rights Reserved
+     * @copyright 2019 All Rights Reserved
      * @version   1.0.0
      */
     

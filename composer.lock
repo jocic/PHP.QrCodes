@@ -4,8 +4,53 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4d601f5df5b8efe77268839d9f068960",
-    "packages": [],
+    "content-hash": "c39d717d5d9115caadf955a571b0b33a",
+    "packages": [
+        {
+            "name": "jocic/encoders",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jocic/PHP.Encoders.git",
+                "reference": "8115eef3c19067f469a0aacf4d6ad895e61bc2bb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jocic/PHP.Encoders/zipball/8115eef3c19067f469a0aacf4d6ad895e61bc2bb",
+                "reference": "8115eef3c19067f469a0aacf4d6ad895e61bc2bb",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "php": ">=7.2",
+                "php-coveralls/php-coveralls": "^2.1",
+                "phpunit/phpunit": "^7.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Jocic\\": "source/Jocic/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Đorđe Jocić",
+                    "email": "office@djordjejocic.com"
+                }
+            ],
+            "description": "Encoders is a creatively named PHP library containing various binary-to-text encoding implementations.",
+            "keywords": [
+                "encoders"
+            ],
+            "time": "2019-01-17T23:47:18+00:00"
+        }
+    ],
     "packages-dev": [
         {
             "name": "doctrine/instantiator",

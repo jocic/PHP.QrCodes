@@ -35,7 +35,7 @@
     
     /**
      * <i>TestQrCore</i> class is used for testing methods located in the
-     * project's <i>QR Core</i> class.
+     * project's <i>QRCore</i> class.
      * 
      * @author    Djordje Jocic <office@djordjejocic.com>
      * @copyright 2019 All Rights Reserved

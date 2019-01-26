@@ -2,6 +2,7 @@
     <testsuites>
         <testsuite name="essentials">
             <file>tests/essentials/test-autoloader.php</file>
+            <file>tests/essentials/test-qr-core.php</file>
         </testsuite>
     </testsuites>
     <filter>

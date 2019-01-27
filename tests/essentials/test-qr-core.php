@@ -126,6 +126,158 @@
             }
         }
         
+        /**
+         * Tests <i>getHashDigest</i> method.
+         * 
+         * @author    Djordje Jocic <office@djordjejocic.com>
+         * @copyright 2019 All Rights Reserved
+         * @version   1.0.0
+         * 
+         * @return void
+         */
+        
+        public function testHashDigestMethod()
+        {
+            // Core Variables
+            
+            $qrCore = new QrCore();
+            
+            // Other Variables
+            
+            $testCombinations = [[
+                "hash"  => "7c4a8d09ca3762af61e59520943dc26494f8941b",
+                "value" => "123456"
+            ], [
+                "hash"  => "a18f2484f0ce8c28b44d99f1288a2e5c3571e694",
+                "value" => "CAKE IS A LIE"
+            ]];
+            
+            // Step 1 - Valid Tests
+            
+            foreach ($testCombinations as $testCombination)
+            {
+                $this->assertSame($testCombination["hash"],
+                    $qrCore->getHashDigest($testCombination["value"]));
+            }
+            
+            // Step 2 - Invalid Test
+            
+            try
+            {
+                $qrCore->getHashDigest(1337);
+                
+                $this->fail("Exception should've been thrown!");
+            }
+            catch (\Exception $e)
+            {
+                $this->assertEquals("Invalid value provided.", $e->getMessage());
+            }
+        }
+        
+        /**
+         * Tests <i>getFileName</i> method.
+         * 
+         * @author    Djordje Jocic <office@djordjejocic.com>
+         * @copyright 2019 All Rights Reserved
+         * @version   1.0.0
+         * 
+         * @return void
+         */
+        
+        public function testFileNameMethod()
+        {
+            // Core Variables
+            
+            $qrCore = new QrCore();
+            
+            // Other Variables
+            
+            $testCombinations = [[
+                "value"     => "123456",
+                "prefix"    => "generic",
+                "extension" => "png",
+                "codeSize"  => "300",
+                "fileName"  => "generic-7c4a8d09ca3762af61e59520943dc26494f89" .
+                    "41b-300.png"
+            ], [
+                "value"     => "CAKE IS A LIE!",
+                "prefix"    => "remote",
+                "extension" => "jpg",
+                "codeSize"  => "400",
+                "fileName"  => "remote-42b85546c3c2d993d214c758e4affb56401f21" .
+                    "c7-400.jpg"
+            ]];
+            
+            // Step 1 - Test Method Without Code Size
+            
+            try
+            {
+                $qrCore->getFileName("test");
+                
+                $this->fail("Exception should've been thrown!");
+            }
+            catch (\Exception $e)
+            {
+                $this->assertEquals("QR code size wasn't set.", $e->getMessage());
+            }
+            
+            // Step 2 - Test Combinations
+            
+            foreach ($testCombinations as $testCombination)
+            {
+                $qrCore->setQrCodeSize($testCombination["codeSize"]);
+                
+                $this->assertEquals($testCombination["fileName"],
+                    $qrCore->getFileName($testCombination["value"],
+                        $testCombination["prefix"],
+                        $testCombination["extension"]));
+            }
+        }
+        
+        /**
+         * Tests <i>getFileLocation</i> method.
+         * 
+         * @author    Djordje Jocic <office@djordjejocic.com>
+         * @copyright 2019 All Rights Reserved
+         * @version   1.0.0
+         * 
+         * @return void
+         */
+        
+        public function testFileLocationMethod()
+        {
+            // Core Variables
+            
+            $qrCore = new QrCore();
+            
+            // Other Variables
+            
+            $testCombinations = [[
+                "value"     => "123456",
+                "directory" => "/a/b/c",
+                "codeSize"  => "300",
+                "location"  => "/a/b/c/generic-7c4a8d09ca3762af61e59520943dc2" .
+                    "6494f8941b-300.png"
+            ], [
+                "value"     => "CAKE IS A LIE!",
+                "directory" => "",
+                "codeSize"  => "400",
+                "location"  => "./generic-42b85546c3c2d993d214c758e4affb56401" .
+                    "f21c7-400.png"
+            ]];
+            
+            // Logic
+            
+            foreach ($testCombinations as $testCombination)
+            {
+                $qrCore->setQrCodeSize($testCombination["codeSize"]);
+                $qrCore->setStorageDirectory($testCombination["directory"]);
+                
+                $this->assertEquals($testCombination["location"],
+                    $qrCore->getFileLocation($testCombination["value"]));
+            }
+        }
+        
         /*****************\
         |* CHECK METHODS *|
         \*****************/

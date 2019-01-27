@@ -115,6 +115,104 @@
             return $this->storageDirectory;
         }
         
+        /**
+         * Generates & returns hash digest of a provided value.
+         * 
+         * @author    Djordje Jocic <office@djordjejocic.com>
+         * @copyright 2019 All Rights Reserved
+         * @version   1.0.0
+         * 
+         * @param string $value
+         *   Value that should be used for generating the QR code.
+         * @return string
+         *   Hash digest of a provided value.
+         */
+        
+        public function getHashDigest($value)
+        {
+            // Step 1 - Check Value
+            
+            if (!is_string($value))
+            {
+                throw new \Exception("Invalid value provided.");
+            }
+            
+            // Step 2 - Generate & Return Hash
+            
+            return sha1($value);
+        }
+        
+        /**
+         * Generates & returns a file name for a provided value.
+         * 
+         * @author    Djordje Jocic <office@djordjejocic.com>
+         * @copyright 2019 All Rights Reserved
+         * @version   1.0.0
+         * 
+         * @param string $value
+         *   Value that should be used for generating the QR code.
+         * @param string $prefix
+         *   Optional parameter that is used for specifying type of a QR code.
+         * @param string $extension
+         *   File extension, ex. <i>PNG</i> if QR code will be in that format.
+         * @return string
+         *   Hash digest of a provided value.
+         */
+        
+        public function getFileName($value, $prefix = "generic",
+            $extension = "png")
+        {
+            // Core Variables
+            
+            $hashDigest = $this->getHashDigest($value);
+            $codeSize   = $this->getQrCodeSize();
+            
+            // Step 1 - Check Parameters
+            
+            if ($codeSize == null)
+            {
+                throw new \Exception("QR code size wasn't set.");
+            }
+            
+            // Step 2 - Generate & Return File Name
+            
+            return $prefix . "-" . $hashDigest . "-" . $codeSize . "." .
+                $extension;
+        }
+        
+        /**
+         * Generates & returns a file location for a provided value.
+         * 
+         * @author    Djordje Jocic <office@djordjejocic.com>
+         * @copyright 2019 All Rights Reserved
+         * @version   1.0.0
+         * 
+         * @param string $value
+         *   Value that should be used for generating the QR code.
+         * @return string
+         *   Hash digest of a provided value.
+         */
+        
+        public function getFileLocation($value)
+        {
+            // Core Variables
+            
+            $fileName         = $this->getFileName($value);
+            $storageDirectory = $this->getStorageDirectory();
+            
+            // Logic
+            
+            if ($storageDirectory == null)
+            {
+                return "." . DIRECTORY_SEPARATOR . $this->getFileName($value);
+            }
+            
+            return join(DIRECTORY_SEPARATOR, [
+                $storageDirectory,
+                $fileName
+            ]);
+        }
+        
         /***************\
         |* SET METHODS *|
         \***************/

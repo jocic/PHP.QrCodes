@@ -6,6 +6,9 @@
             <file>tests/essentials/test-qr-core.php</file>
             <file>tests/essentials/test-remote-qr-core.php</file>
         </testsuite>
+        <testsuite name="remote">
+            <file>tests/remote/test-google-qr.php</file>
+        </testsuite>
     </testsuites>
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="false">

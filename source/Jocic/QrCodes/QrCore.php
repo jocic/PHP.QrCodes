@@ -39,7 +39,7 @@
      * @version   1.0.0
      */
     
-    class QrCore
+    class QrCore extends FileSystem
     {
         /******************\
         |* CORE CONSTANTS *|
@@ -341,141 +341,7 @@
         |* CORE METHODS *|
         \****************/
         
-        /**
-         * Loads contents from a desired file.
-         * 
-         * @author    Djordje Jocic <office@djordjejocic.com>
-         * @copyright 2019 All Rights Reserved
-         * @version   1.0.0
-         * 
-         * @param string $fileLocation
-         *   File location that should be used for loading.
-         * @param integer $bufferSize
-         *   Buffer size in bytes that will be used for loading.
-         * @param bool $suppressException
-         *   Value <i>TRUE</i> if you want to suppress exception, and vice versa.
-         * @return string
-         *   Contents of a desired file.
-         */
-        
-        public function loadFromFile($fileLocation, $bufferSize = 1024,
-            $suppressException = false)
-        {
-            // Core Variables
-            
-            $fileHandler = null;
-            $contents    = "";
-            
-            // Logic
-            
-            try
-            {
-                $fileHandler = fopen($fileLocation, "r");
-                
-                while (!feof($fileHandler))
-                {
-                    $contents .= fread($fileHandler, $bufferSize);
-                }
-            }
-            catch (\Exception $e)
-            {
-                if (!$suppressException)
-                {
-                    throw new \Exception("An unkown IO error occured.");
-                }
-            }
-            finally
-            {
-                if ($fileHandler != null)
-                {
-                    fclose($fileHandler);
-                }
-            }
-            
-            return $contents;
-        }
-        
-        /**
-         * Saves contents to a desired file location.
-         * 
-         * @author    Djordje Jocic <office@djordjejocic.com>
-         * @copyright 2019 All Rights Reserved
-         * @version   1.0.0
-         * 
-         * @param string $fileLocation
-         *   File location that should be used for saving.
-         * @param mixed $contents
-         *   Contents that should be saved to a desired file.
-         * @param bool $suppressException
-         *   Value <i>TRUE</i> if you want to suppress exception, and vice versa.
-         * @return bool
-         *   Value <i>TRUE</i> if data was saved, and vice versa.
-         */
-        
-        public function saveToFile($fileLocation, $contents,
-            $suppressException = false)
-        {
-            // Core Variables
-            
-            $fileHandler  = null;
-            $bytesWritten = 0;
-            
-            // Logic
-            
-            try
-            {
-                $fileHandler  = fopen($fileLocation, "w");
-                $bytesWritten = fwrite($fileHandler, $contents);
-            }
-            catch (\Exception $e)
-            {
-                if (!$suppressException)
-                {
-                    throw new \Exception("An unkown IO error occured.");
-                }
-            }
-            finally
-            {
-                if ($fileHandler != null)
-                {
-                    fclose($fileHandler);
-                }
-            }
-            
-            return $bytesWritten > 0;
-        }
-        
-        /**
-         * Removes a file on the specified file location.
-         * 
-         * @author    Djordje Jocic <office@djordjejocic.com>
-         * @copyright 2019 All Rights Reserved
-         * @version   1.0.0
-         * 
-         * @param string $fileLocation
-         *   File location that should be used for saving.
-         * @param bool $suppressException
-         *   Value <i>TRUE</i> if you want to suppress exception, and vice versa.
-         * @return bool
-         *   Value <i>TRUE</i> if file was removed, and vice versa.
-         */
-        
-        public function removeFile($fileLocation, $suppressException = false)
-        {
-            // Logic
-            
-            try
-            {
-                unlink($fileLocation);
-            }
-            catch (\Exception $e)
-            {
-                if (!$suppressException)
-                {
-                    throw new \Exception("An unkown IO error occured.");
-                }
-            }
-        }
+        // CORE METHODS GO HERE
         
         /*****************\
         |* CHECK METHODS *|
@@ -502,7 +368,7 @@
             
             // Logic
             
-            return is_file($fileLocation);
+            return $this->fileExists($fileLocation);
         }
         
         /*****************\

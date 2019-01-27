@@ -288,62 +288,7 @@
         |* PRIMARY METHODS *|
         \*******************/
         
-        /**
-         * Tests <i>saveToFile</i> & <i>loadFromFile</i> methods.
-         * 
-         * @author    Djordje Jocic <office@djordjejocic.com>
-         * @copyright 2018 All Rights Reserved
-         * @version   1.0.0
-         * 
-         * @return void
-         */
-        
-        public function testSaveLoadFunction()
-        {
-            // Core Variables
-            
-            $qrCore = new QrCore();
-            
-            // Other Variables
-            
-            $tempDirectory = sys_get_temp_dir();
-            $tempLocation  = join(DIRECTORY_SEPARATOR, [
-                $tempDirectory,
-                "qr-codes-save-test"
-            ]);
-            
-            // Step 1 - Test Saving & Loading (Valid)
-            
-            $qrCore->saveToFile($tempLocation, "...");
-            
-            $this->assertSame("...", $qrCore->loadFromFile($tempLocation));
-            
-            // Step 2 - Test Saving (Invalid)
-            
-            try
-            {
-                $qrCore->saveToFile("/cake/is/a/lie", "...");
-                
-                $this->fail("Exception should've been thrown!");
-            }
-            catch (\Exception $e)
-            {
-                $this->assertEquals("An unkown IO error occured.", $e->getMessage());
-            }
-            
-            // Step 3 - Test Loading (Invalid)
-            
-            try
-            {
-                $qrCore->loadFromFile("/cake/is/a/lie", "...");
-                
-                $this->fail("Exception should've been thrown!");
-            }
-            catch (\Exception $e)
-            {
-                $this->assertEquals("An unkown IO error occured.", $e->getMessage());
-            }
-        }
+        // PRIMARY METHODS GO HERE
         
         /*********************\
         |* SECONDARY METHODS *|

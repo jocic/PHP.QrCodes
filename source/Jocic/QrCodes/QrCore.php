@@ -45,7 +45,32 @@
         |* CORE CONSTANTS *|
         \******************/
         
-        // CORE CONSTANTS GO HERE
+        /**
+         * Encoding constant - for getting QR code image in <i>Base 16</i>.
+         * 
+         * @var    integer
+         * @access public
+         */
+        
+        public const E_BASE_16 = 0;
+        
+        /**
+         * Encoding constant - for getting QR code image in <i>Base 32</i>.
+         * 
+         * @var    integer
+         * @access public
+         */
+        
+        public const E_BASE_32 = 1;
+        
+        /**
+         * Encoding constant - for getting QR code image in <i>Base 64</i>.
+         * 
+         * @var    integer
+         * @access public
+         */
+        
+        public const E_BASE_64 = 2;
         
         /******************\
         |* CORE VARIABLES *|
@@ -213,6 +238,53 @@
             ]);
         }
         
+        /**
+         * Returns the encoded value of a generated QR code from a given value.
+         * 
+         * @author    Djordje Jocic <office@djordjejocic.com>
+         * @copyright 2019 All Rights Reserved
+         * @version   1.0.0
+         * 
+         * @param string $value
+         *   Value that was used to generate the QR code.
+         * @param integer $encoding
+         *   ID of an encoding that should be used.
+         * @return string
+         *   Encoded value of the QR code in a selected encoding format.
+         */
+        
+        public function getEncodedValue($value, $encoding = 1)
+        {
+            // Core Variables
+            
+            $encoder      = null;
+            $fileLocation = $this->getFileLocation($value);
+            
+            // Step 1 - 
+            
+            switch ($encoding)
+            {
+                case 0:
+                    $encoder = new Base16();
+                    break;
+                
+                case 1:
+                    $encoder = new Base32();
+                    break;
+                
+                case 2:
+                    $encoder = new Base64();
+                    break;
+                
+                default:
+                    throw new \Exception("Invalid encoding ID provided.");
+            }
+            
+            // Step 2 - Encode Generated Code
+            
+            return $encoder->encode($this->loadFromFile($fileLocation));
+        }
+        
         /***************\
         |* SET METHODS *|
         \***************/
@@ -373,11 +445,65 @@
             return $bytesWritten > 0;
         }
         
+        /**
+         * Removes a file on the specified file location.
+         * 
+         * @author    Djordje Jocic <office@djordjejocic.com>
+         * @copyright 2019 All Rights Reserved
+         * @version   1.0.0
+         * 
+         * @param string $fileLocation
+         *   File location that should be used for saving.
+         * @param bool $suppressException
+         *   Value <i>TRUE</i> if you want to suppress exception, and vice versa.
+         * @return bool
+         *   Value <i>TRUE</i> if file was removed, and vice versa.
+         */
+        
+        public function removeFile($fileLocation, $suppressException = false)
+        {
+            // Logic
+            
+            try
+            {
+                unlink($fileLocation);
+            }
+            catch (\Exception $e)
+            {
+                if (!$suppressException)
+                {
+                    throw new \Exception("An unkown IO error occured.");
+                }
+            }
+        }
+        
         /*****************\
         |* CHECK METHODS *|
         \*****************/
         
-        // CHECK METHODS GO HERE
+        /**
+         * Checks if QR code was generated from a provided value.
+         * 
+         * @author    Djordje Jocic <office@djordjejocic.com>
+         * @copyright 2019 All Rights Reserved
+         * @version   1.0.0
+         * 
+         * @param string $value
+         *   Value that was used to generate the QR code.
+         * @return bool
+         *   Value <i>TRUE</i> if QR code was generated, and vice versa.
+         */
+        
+        public function isQrCodeGenerated($value)
+        {
+            // Core Variables
+            
+            $fileLocation = $this->getFileLocation($value);
+            
+            // Logic
+            
+            return is_file($fileLocation);
+        }
         
         /*****************\
         |* OTHER METHODS *|

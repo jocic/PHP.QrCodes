@@ -52,32 +52,7 @@
         |* CORE CONSTANTS *|
         \******************/
         
-        /**
-         * Encoding constant - for getting QR code image in <i>Base 16</i>.
-         * 
-         * @var    integer
-         * @access public
-         */
-        
-        public const E_BASE_16 = 0;
-        
-        /**
-         * Encoding constant - for getting QR code image in <i>Base 32</i>.
-         * 
-         * @var    integer
-         * @access public
-         */
-        
-        public const E_BASE_32 = 1;
-        
-        /**
-         * Encoding constant - for getting QR code image in <i>Base 64</i>.
-         * 
-         * @var    integer
-         * @access public
-         */
-        
-        public const E_BASE_64 = 2;
+        // CORE CONSTANTS GO HERE
         
         /******************\
         |* CORE VARIABLES *|
@@ -160,55 +135,6 @@
             return $this->apiKey;
         }
         
-        /**
-         * Generates the QR code based on the set parameters and returns it's
-         * encoded value. If the QR code was already generated only encoded
-         * value will be returned.
-         * 
-         * @author    Djordje Jocic <office@djordjejocic.com>
-         * @copyright 2019 All Rights Reserved
-         * @version   1.0.0
-         * 
-         * @param string $value
-         *   Value that should be used for generating the QR code.
-         * @param integer $encoding
-         *   ID of an encoding that should be used.
-         * @return string
-         *   Encoded value of the QR code in a selected format.
-         */
-        
-        public function getEncodedValue($value, $encoding = 1)
-        {
-            // Core Variables
-            
-            $encoder      = null;
-            $codeLocation = $this->getFileLocation($value);
-            
-            // Step 1 - 
-            
-            switch ($encoding)
-            {
-                case 0:
-                    $encoder = new Base16();
-                    break;
-                
-                case 1:
-                    $encoder = new Base32();
-                    break;
-                
-                case 2:
-                    $encoder = new Base64();
-                    break;
-                
-                default:
-                    throw new \Exception("Invalid encoding ID provided.");
-            }
-            
-            // Step 2 - Encode Generated Code
-            
-            return $encoder->encode($this->loadFromFile($codeLocation));
-        }
-        
         /***************\
         |* SET METHODS *|
         \***************/
@@ -258,25 +184,17 @@
         {
             // Core Variables
             
-            $requestUrl   = $this->getUrl($value);
             $directory    = $this->getStorageDirectory();
-            $filename     = sha1($requestUrl) . ".png";
-            $fileLocation = "." . DIRECTORY_SEPARATOR . $filename;
+            $requestUrl   = $this->getUrl($value);
+            $fileLocation = $this->getFileLocation($value);
             
             // Other Variables
             
             $codeData = null;
             
-            // Step 1 - Determine File Location
+            // Logic
             
-            if ($directory != null)
-            {
-                $fileLocation = $directory . DIRECTORY_SEPARATOR . $filename;
-            }
-            
-            // Step 2 - Generate QR Code & Return It's Location
-            
-            if (!is_file($fileLocation))
+            if (!$this->isQrCodeGenerated($value))
             {
                 // Get QR Code
                 
@@ -305,26 +223,11 @@
     
         public function regenerate($value)
         {
-            // Core Variables
-            
-            $requestUrl = $this->getUrl($value);
-            $directory  = $this->getStorageDirectory();
-            $filename   = sha1($requestUrl) . ".png";
-            
-            // File Variables
-            
-            $fileLocation = "." . DIRECTORY_SEPARATOR . $filename;
-            
             // Logic
             
-            if ($directory != null)
+            if ($this->isQrCodeGenerated($value))
             {
-                $fileLocation = $directory . DIRECTORY_SEPARATOR . $filename;
-            }
-            
-            if (is_file($fileLocation))
-            {
-                unlink($fileLocation);
+                $this->removeFile($fileLocation);
             }
             
             return $this->generate($value);

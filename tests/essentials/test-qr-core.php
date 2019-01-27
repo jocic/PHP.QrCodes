@@ -48,7 +48,83 @@
         |* GET & SET METHODS *|
         \*********************/
         
-        // GET & SET METHODS GO HERE
+        /**
+         * Tests <i>setQrCodeSize</i> & <i>getQrCodeSize</i> methods.
+         * 
+         * @author    Djordje Jocic <office@djordjejocic.com>
+         * @copyright 2019 All Rights Reserved
+         * @version   1.0.0
+         * 
+         * @return void
+         */
+        
+        public function testQrCodeSizeMethods()
+        {
+            // Core Variables
+            
+            $qrCore = new QrCore();
+            
+            // Step 1 - Set Valid Value
+            
+            $qrCore->setQrCodeSize(400);
+            
+            $this->assertSame(400, $qrCore->getQrCodeSize());
+            
+            // Step 2 - Set Invalid Value
+            
+            try
+            {
+                $qrCore->setQrCodeSize("#");
+                
+                $this->fail("Exception should've been thrown!");
+            }
+            catch (\Exception $e)
+            {
+                $this->assertEquals("Invalid value provided.", $e->getMessage());
+            }
+        }
+        
+        /**
+         * Tests <i>setStorageDirectory</i> & <i>getStorageDirectory</i> methods.
+         * 
+         * @author    Djordje Jocic <office@djordjejocic.com>
+         * @copyright 2019 All Rights Reserved
+         * @version   1.0.0
+         * 
+         * @return void
+         */
+        
+        public function testStorageDirectoryMethods()
+        {
+            // Core Variables
+            
+            $qrCore = new QrCore();
+            
+            // Other Variables
+            
+            $tempDirectory = sys_get_temp_dir();
+            
+            // Step 1 - Set Valid Setting
+            
+            $qrCore->setStorageDirectory($tempDirectory);
+            
+            $this->assertSame($tempDirectory,
+                $qrCore->getStorageDirectory());
+            
+            // Step 2 - Set Invalid Setting
+            
+            try
+            {
+                $qrCore->setStorageDirectory(1337);
+                
+                $this->fail("Exception should've been thrown!");
+            }
+            catch (\Exception $e)
+            {
+                $this->assertEquals("Invalid storage directory used.",
+                    $e->getMessage());
+            }
+        }
         
         /*****************\
         |* CHECK METHODS *|

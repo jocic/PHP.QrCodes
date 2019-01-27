@@ -84,24 +84,6 @@
         \******************/
         
         /**
-         * Size of the generated QR codes - width & height.
-         * 
-         * @var    integer
-         * @access protected
-         */
-        
-        protected $qrCodeSize = null;
-        
-        /**
-         * Directory location that should be used for storing the QR code.
-         * 
-         * @var    string
-         * @access protected
-         */
-        
-        protected $storageDirectory = null;
-        
-        /**
          * API key that should be used for generating QR codes.
          * 
          * @var    string
@@ -159,42 +141,6 @@
         /***************\
         |* GET METHODS *|
         \***************/
-        
-        /**
-         * Returns set QR code size - width and height.
-         * 
-         * @author    Djordje Jocic <office@djordjejocic.com>
-         * @copyright 2019 All Rights Reserved
-         * @version   1.0.0
-         * 
-         * @return integer
-         *   Set QR code size.
-         */
-        
-        public function getQrCodeSize()
-        {
-            // Logic
-            
-            return $this->qrCodeSize;
-        }
-        
-        /**
-         * Returns get directory used for storing generated QR codes.
-         * 
-         * @author    Djordje Jocic <office@djordjejocic.com>
-         * @copyright 2019 All Rights Reserved
-         * @version   1.0.0
-         * 
-         * @return string
-         *   Set storage directory.
-         */
-        
-        public function getStorageDirectory()
-        {
-            // Logic
-            
-            return $this->storageDirectory;
-        }
         
         /**
          * Returns API key used for generating QR codes.
@@ -332,54 +278,6 @@
         /***************\
         |* SET METHODS *|
         \***************/
-        
-        /**
-         * Sets QR code size - width and height.
-         * 
-         * @author    Djordje Jocic <office@djordjejocic.com>
-         * @copyright 2019 All Rights Reserved
-         * @version   1.0.0
-         * 
-         * @param integer $qrCodeSize
-         *   Size of the QR codes that should be generated.
-         * @return void
-         */
-        
-        public function setQrCodeSize($qrCodeSize)
-        {
-            // Logic
-            
-            if (!is_numeric($qrCodeSize))
-            {
-                throw new \Exception("Invalid value provided.");
-            }
-            
-            $this->qrCodeSize = $qrCodeSize;
-        }
-        
-        /**
-         * Sets directory used for storing generated QR codes.
-         * 
-         * @author    Djordje Jocic <office@djordjejocic.com>
-         * @copyright 2019 All Rights Reserved
-         * @version   1.0.0
-         * 
-         * @param string $directory
-         *   Directory for storing generated QR codes.
-         * @return void
-         */
-        
-        public function setStorageDirectory($storageDirectory)
-        {
-            // Logic
-            
-            if (!is_string($storageDirectory))
-            {
-                throw new \Exception("Invalid storage directory used.");
-            }
-            
-            $this->storageDirectory = $storageDirectory;
-        }
         
         /**
          * Sets API key used for generating QR codes.

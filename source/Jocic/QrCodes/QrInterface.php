@@ -80,7 +80,7 @@
         public function getFileLocation($value);
         
         /**
-         * Returns QR code's filename.
+         * Returns QR code's file name.
          * 
          * @author    Djordje Jocic <office@djordjejocic.com>
          * @copyright 2019 All Rights Reserved
@@ -88,9 +88,13 @@
          * 
          * @param string $value
          *   Value that should be used for generating the QR code.
+         * @param string $prefix
+         *   Optional parameter that is used for specifying type of a QR code.
+         * @param string $extension
+         *   File extension, ex. <i>PNG</i> if QR code will be in that format.
          */
         
-        public function getFilename($value);
+        public function getFileName($value, $prefix, $extension);
         
         /**
          * Returns QR code's encoded value.
